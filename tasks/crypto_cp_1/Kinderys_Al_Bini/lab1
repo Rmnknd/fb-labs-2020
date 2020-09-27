@@ -1,3 +1,21 @@
-# trying to make git working again
- print('hello world')
- # new  commentary k,iuiuiuuiiuuiuiui
+import numpy as np
+import math
+f = open("text.txt", "r")
+r = f.read()
+alphabet = np.array(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '])
+rarity = np.zeros(len(alphabet))
+temporary = np.zeros(len(r))
+for i in range(len(alphabet)):
+    for k in range(len(alphabet)):
+
+        for j in range(len(r)):
+            if r[j] == alphabet[i]:
+                rarity[i] = rarity[i]+1
+                temporary[j] = i
+
+print(rarity)
+rarity = rarity/len(r)
+H1 = -np.dot(rarity, np.log2(rarity))
+print(H1)
+
+
