@@ -4,6 +4,7 @@ f = open("text.txt", "r")
 r = f.read()
 alphabet = np.array(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '])
 rarity = np.zeros(len(alphabet))
+rarity2 = np.zeros(len(r) ** 2)
 temporary = np.zeros(len(r))
 for i in range(len(alphabet)):
     for k in range(len(alphabet)):
@@ -12,10 +13,20 @@ for i in range(len(alphabet)):
             if r[j] == alphabet[i]:
                 rarity[i] = rarity[i]+1
                 temporary[j] = i
+                if j+1 == len(r):
+                    break
+                elif r[j+1] == alphabet[k]:
+                    rarity2[i*len(r)+k] = rarity2[i*len(r)+k]+1#
+#print(rarity)
+#print(rarity2
+rarity2 = rarity2/(len(r)-1)
+rarity = rarity/(len(r) * len(alphabet))
+rarity2ed = rarity2[np.nonzero(rarity2)]
+rarity1 = rarity[np.nonzero(rarity)]
+H1 = -np.dot(rarity1, np.log2(rarity1))
 
-print(rarity)
-rarity = rarity/len(r)
-H1 = -np.dot(rarity, np.log2(rarity))
+H2 = -np.dot(rarity2ed, np.log2(rarity2ed))/2
 print(H1)
+print(H2)
 
 
