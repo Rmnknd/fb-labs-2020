@@ -1,42 +1,52 @@
 import numpy as np
 import math
 import codecs
-f = open("text.txt", "r", encoding='utf-8')
-r = f.read()
-print(len(r))
-punctuations = [".", ",", "!", "?", ";", ":", "-", "1", "2", "3", "4","5", "6", "7","8","9", "0","—","»","«"]
+file = open("text.txt", "r", encoding='utf-8')
+text = file.read()
+print(len(text))
+punctuations = [".", ",", "!", "?", ";", ":", "-", "1", "2", "3", "4","5", "6", "7","8","9", "0","—","»","«", " "]
 for k in range(len(punctuations)):
-    r = r.replace(punctuations[k], "")
-    r =r.lower()
-print(len(r))
-alphabet = np.array(['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'ъ', 'э', 'ю', 'я', ' '])
-rarity = np.zeros(len(alphabet))
-rarity2 = np.zeros(len(alphabet) ** 2)  # tyt bylo rarity len(r)
-temporary = np.zeros(len(r))
+    text = text.replace(punctuations[k], "")# get rid of punctuations
+text = text.lower()
+print(len(text))
+alphabet = np.array(['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'ъ', 'э', 'ю', 'я'])
+rarity = np.zeros(len(alphabet)) # creating array of rarity for monogram
+rarity2 = np.zeros(len(alphabet) ** 2) #creating array of rarity for begram
+rarity2_step2 = np.zeros(len(alphabet) ** 2)
+temporary = np.zeros(len(text))# array for recoded text
 
 
-for i in range(len(alphabet)):
-    for j in range(len(r)):
-        if r[j] == alphabet[i]:
-            rarity[i] = rarity[i]+1
-            temporary[j] = i
-for k in range(len(temporary) - 2):
-    o = int(temporary[k])
+for i in range(len(alphabet)):# iterating per alphabet
+    for j in range(len(text)): # iteration trought the whole text
+        if text[j] == alphabet[i]:# checking for matching
+            rarity[i] = rarity[i]+1 # if so plus to rarity
+            temporary[j] = i # saving letter code
+for k in range(len(temporary)-1): # loop for counting begram rarity
+    temp1 = int(temporary[k]) # getting code of first letter
 
-    p = int(temporary[k+1])
+    temp2 = int(temporary[k+1]) # getting code of next letter
 
-    rarity2[o*len(alphabet)+p] += 1
+    rarity2[temp1*len(alphabet)+temp2] += 1 # increasing rarity of begram with (temp1, temp2)
+for k1 in range(0, len(temporary)-1, 2):
+    temp12 = int(temporary[k1]) # getting code of first letter
+
+    temp22 = int(temporary[k1+1]) # getting code of next letter
+
+    rarity2_step2[temp12*len(alphabet)+temp22] += 1
 #print(rarity)
 #print(rarity2
 
-rarity2 = rarity2/(len(r)-1)
-rarity = rarity/(len(r)) # tyt bylo r
-rarity2ed = rarity2[np.nonzero(rarity2)]
-rarity1 = rarity[np.nonzero(rarity)]
-H1 = -np.dot(rarity1, np.log2(rarity1))
+rarity2 = rarity2/(len(text)-1)
+rarity = rarity/(len(text))
+rarity2ed = rarity2[np.nonzero(rarity2)] # get rid of all zero values
+rarity1 = rarity[np.nonzero(rarity)] # get rid of all zero values
+rarity2_step2ed = rarity2_step2[np.nonzero(rarity2_step2)]
+H1 = -np.dot(rarity1, np.log2(rarity1)) # measuring H1
 
-H2 = -np.dot(rarity2ed, np.log2(rarity2ed))/2
+
+H2 = -np.dot(rarity2ed, np.log2(rarity2ed))/2 # measuring H2
+H2step2 = -np.dot(rarity2ed, np.log2(rarity2ed))/2
 print(H1)
 print(H2)
-
+print(H2step2)
 
