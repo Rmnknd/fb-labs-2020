@@ -1,8 +1,9 @@
 import numpy as np
 import math
-f = open("text.txt", "r")
+import codecs
+f = open("text.txt", "r", encoding='utf-8')
 r = f.read()
-alphabet = np.array(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '])
+alphabet = np.array(['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'ъ', 'э', 'ю', 'я', ' '])
 rarity = np.zeros(len(alphabet))
 rarity2 = np.zeros(len(r) ** 2)
 temporary = np.zeros(len(r))
