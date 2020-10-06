@@ -50,7 +50,7 @@ H1 = -np.dot(rarity1, np.log2(rarity1)) # measuring H1
 H2 = -np.dot(rarity2ed, np.log2(rarity2ed))/2 # measuring H2
 H2step2 = -np.dot(rarity2ed, np.log2(rarity2ed))/2
 orig_stdout = sys.stdout
-f = open('out2.txt', 'w',encoding='utf-8')
+f = open('out2.txt', 'w', encoding='utf-8')
 sys.stdout = f
 
 for i in range(len(alphabet)):
