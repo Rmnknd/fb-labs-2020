@@ -6,7 +6,7 @@ import re
 file = open("text.txt", "r", encoding='utf-8')
 text = file.read()
 print(len(text))
-punctuations = [".", ",", "!", "?", ";", ":", "-", "1", "2", "3", "4","5", "6", "7","8","9", "0","—","»","«", " "]
+punctuations = [".", ",", "!", "?", ";", ":", "-", "1", "2", "3", "4","5", "6", "7","8","9", "0","—","»","«"," "]
 for k in range(len(punctuations)):
     text = text.replace(punctuations[k], "")# get rid of punctuations
 text = text.lower()
@@ -31,12 +31,12 @@ for k in range(len(temporary)-1): # loop for counting begram rarity
     temp2 = int(temporary[k+1]) # getting code of next letter
 
     rarity2[temp1*len(alphabet)+temp2] += 1 # increasing rarity of begram with (temp1, temp2)
-for k1 in range(0, len(temporary)-1, 2):
-    temp12 = int(temporary[k1]) # getting code of first letter
+for k1 in range(int((len(temporary) + 1) / 2) - 1):
+    temp12 = int(temporary[2 * k1]) # getting code of first letter
 
-    temp22 = int(temporary[k1+1]) # getting code of next letter
+    temp22 = int(temporary[2 * k1 + 1]) # getting code of next letter
 
-    rarity2_step2[temp12*len(alphabet)+temp22] += 1
+    rarity2_step2[temp12*len(alphabet)+temp22] +=1
 #print(rarity)
 #print(rarity2
 
@@ -59,7 +59,7 @@ for i in range(len(alphabet)):
 print ("\n\n\n\n bigrams raritys \n")
 for i in range(len(alphabet)):
     for j in range (len(alphabet)):
-        print (alphabet [i],alphabet [j], " | ", "%.7f" % rarity2[i*len(alphabet)+j], "\t")
+        print (alphabet [i],alphabet [j], " | ", "%.7f" % rarity2[i*len(alphabet)+j], " | ", "\t")
 sys.stdout = orig_stdout
 f.close()
 print(H1)
