@@ -50,10 +50,20 @@ H1 = -np.dot(rarity1, np.log2(rarity1)) # measuring H1
 H2 = -np.dot(rarity2ed, np.log2(rarity2ed))/2 # measuring H2
 H2step2 = -np.dot(rarity2ed, np.log2(rarity2ed))/2
 orig_stdout = sys.stdout
-f = open('out2.txt', 'w', encoding='utf-8')
+f = open('out2.txt', 'w+', encoding='utf-8')
 sys.stdout = f
-
 for i in range(len(alphabet)):
+    for j in range (len(alphabet)):
+        print ("| " , alphabet [i],alphabet [j], " = ", "%.7f" % rarity2[i*len(alphabet)+j], end= '\t')
+    print()
+print ("\n\n\n\n bigrams with step2 raritys \n")
+for i in range(len(alphabet)):
+    for j in range (len(alphabet)):
+        print ("| " , alphabet [i],alphabet [j], " = ", "%.7f" % rarity2_step2[i*len(alphabet)+j], end='\t')
+    print()
+sys.stdout = orig_stdout
+f.close()
+"""for i in range(len(alphabet)):
     print (alphabet [i]," | ","%.7f" % rarity1[i],'\t')
 
 print ("\n\n\n\n bigrams raritys \n")
@@ -61,7 +71,7 @@ for i in range(len(alphabet)):
     for j in range (len(alphabet)):
         print (alphabet [i],alphabet [j], " | ", "%.7f" % rarity2[i*len(alphabet)+j], " | ", "\t")
 sys.stdout = orig_stdout
-f.close()
+f.close()"""
 print(H1)
 print(H2)
 print(H2step2)
