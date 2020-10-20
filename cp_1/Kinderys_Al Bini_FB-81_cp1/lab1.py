@@ -6,13 +6,13 @@ import re
 file = open("text.txt", "r", encoding='utf-8')
 text = file.read()
 print(len(text))
-punctuations = [".", ",", "!", "?", ";", ":", "-", "1", "2", "3", "4","5", "6", "7","8","9", "0","—","»","«"," "]
+punctuations = [".", ",", "!", "?", ";", ":", "-", "1", "2", "3", "4","5", "6", "7","8","9", "0","—","»","«",]
 for k in range(len(punctuations)):
     text = text.replace(punctuations[k], "")# get rid of punctuations
 text = text.lower()
 
 print(len(text))
-alphabet = np.array(['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'ъ', 'э', 'ю', 'я'])
+alphabet = np.array(['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'ъ', 'э', 'ю', 'я',' '])
 rarity = np.zeros(len(alphabet)) # creating array of rarity for monogram
 rarity2 = np.zeros(len(alphabet) ** 2) #creating array of rarity for begram
 rarity2_step2 = np.zeros(len(alphabet) ** 2)
@@ -50,16 +50,14 @@ H1 = -np.dot(rarity1, np.log2(rarity1)) # measuring H1
 H2 = -np.dot(rarity2ed, np.log2(rarity2ed))/2 # measuring H2
 H2step2 = -np.dot(rarity2ed, np.log2(rarity2ed))/2
 orig_stdout = sys.stdout
-f = open('out2.txt', 'w+', encoding='utf-8')
+f = open('out4.txt', 'w+', encoding='utf-8')
 sys.stdout = f
 for i in range(len(alphabet)):
-    for j in range (len(alphabet)):
-        print ("| " , alphabet [i],alphabet [j], " = ", "%.7f" % rarity2[i*len(alphabet)+j], end= '\t')
-    print()
+    print (alphabet [i]," = ", "%.7f" % rarity1[i],end='\t')
 print ("\n\n\n\n bigrams with step2 raritys \n")
 for i in range(len(alphabet)):
     for j in range (len(alphabet)):
-        print ("| " , alphabet [i],alphabet [j], " = ", "%.7f" % rarity2_step2[i*len(alphabet)+j], end='\t')
+        print ( alphabet [i],alphabet [j], " = ", "%.7f" % rarity2_step2[i*len(alphabet)+j], end='\t')
     print()
 sys.stdout = orig_stdout
 f.close()
