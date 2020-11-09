@@ -38,7 +38,7 @@ def solver(a, b, m):
 
 alphabet = np.array(['а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т',
                      'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ы', 'ь', 'э', 'ю', 'я'])
-file = open("../../../../Desktop/text.txt", "r", encoding='utf-8')
+file = open("text.txt", "r", encoding='utf-8')
 text = file.read()
 print(len(text))
 text = text[1:]
