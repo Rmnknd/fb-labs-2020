@@ -120,6 +120,7 @@ for i in range(0, 625):
             b[j] = solver(1, most_common_cipher_bigrams[i3] - a[j] * most_common_bigrams[i1], len(alphabet) ** 2)
             open_text = decrypt(a[j], b[j], temp_bigrams)
             print("ключ що перевіряється: (", a[j], ";", b[j], ")", sep=" ", file=output)
+
             if check_rus(open_text):
                 print("ключ (", a[j], ";", b[j], ")", "є шуканим ключем", sep=" ", file=output)
                 key[0], key[1] = a[j], b[j]
